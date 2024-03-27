@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Elementos generales de sintaxis
+    </h1>
+    <h2>
+        Indentación/contextos
+    </h2>
+    <p>
+        En Python, una de las reglas más importantes para determinar la jerarquía o entorno de las líneas de código es la indentación (o separación horizontal).
+        <br/>
+        La indentación se realiza utilizando la tecla TAB, o en su defecto cuatro espacios en lugar de un TAB.
+        <br/>
+        La primer línea de cada archivo de código debe comenzar <b>sin separación horizontal</b>. Es decir, el texto correspondiente a la primer acción debe estar alineado con la columna 0 del archivo de código.
+        <br/>
+        La separación horizontal delimita la extensión del código correspondiente a los siguientes contextos:
+        <ul>
+            <li>
+                Condicionales
+            </li>
+            <li>
+                Bucles
+            </li>
+            <li>
+                Funciones
+            </li>
+            <li>
+                Clases
+            </li>
+        </ul>
+        Para iniciar un contexto, en la línea que da inicio al mismo se utiliza ":", tras lo cual el lenguaje esperará la separación horizontal.
+        <br/>
+        Al "romper" la separación horizontal, el contexto de la acción o línea de código vuelve a ser el mismo que el del elemento que dió inicio a la separación. Por ejemplo, una línea de código con la misma separación que un condicional se ejecuta independientemente del resultado de la evaluación.
+    </p>
+    <details>
+        <summary>
+            Ejemplos
+        </summary>
+        <details>
+            <summary>
+                Condicional
+            </summary>
+            <pre>
+                <code>
+if condicion == True:
+    accion1 # Esta acción se realiza sólo si la condición se cumple
+
+accion2 # Esta acción se realiza independientemente del resultado de la evaluación
+                </code>
+            </pre>
+        </details>
+        <details>
+            <summary>
+                Bucles
+            </summary>
+            <pre>
+                <code>
+while variable < 10:
+    variable = variable + 1 # Se realiza dentro del bucle
+
+variable = 0 # Se realiza una vez, al finalizar el bucle
+                </code>
+            </pre>
+        </details>
+        <details>
+            <summary>
+                Funciones
+            </summary>
+            <pre>
+                <code>
+def nombre_de_funcion():
+    accion1 # acción realizada al llamar a la función
+    return valor_de_retorno # valor devuelto por la función
+
+accion2 # acción NO realizada por la función 
+# generalmente sólo se utiliza esta separación para definir otras funciones/clases, 
+# no para acciones a realizar secuencialmente por el programa.
+                </code>
+            </pre>
+        </details>
+    </details>
+    <h2>
+        Comentarios
+    </h2>
+    <p>
+        Los comentarios son elementos de texto dentro del código fuente de un programa que no son ejecutados por el intérprete. Sirven para proporcionar explicaciones, anotaciones o documentación sobre el código.
+        <br/>Existen en dos formas: de una línea o de más de una línea. En ambos casos, su indentación es libre y no sigue las reglas necesarias en el resto del código.
+    </p>
+    <pre>
+        <code>
+# Esto es un comentario de una línea. 
+
+# Puede ser escrito tanto en una línea vacía,
+
+print("hola!") # como también a continuación de una sentencia de código
+
+# Cada línea de comentario debe comenzar con un '#', 
+# de lo contrario se interpreta como código
+        </code>
+    </pre>
+    <p>
+        Los comentarios de una línea son especialmente útiles para explicar el funcionamiento de líneas de código particulares, aunque se vuelven tediosos cuando se desea escribir un texto más largo.
+    </p>
+    <pre>
+        <code>
+"""
+Esto es un comentario multilínea. Entre los delimitadores (tres comillas dobles) 
+se puede escribir una cantidad indeterminada de líneas de comentario, 
+sin necesidad de utilizar delimitadores en cada una.
+"""
+        </code>
+    </pre>
+    <p>
+        Los comentarios multilínea son más apropiados para realizar explicaciones conceptuales acerca del programa, pero también para describir tipos de argumentos y valor/es de retorno.
+        <br/>
+        También son especialmente útiles para brindar la información en pantalla que el IDE muestra cuando detecta el llamado a una función o módulo. Para esto, deben ser incluidos al inicio de la función o módulo.
+    </p>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
