@@ -1,3 +1,98 @@
-<footer>
-    <a href="../index.html">Volver al índice</a>
-</footer>
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Condicionales
+    </h1>
+    <p>
+        Los condicionales son estructuras de control que permiten tomar decisiones en base a la evaluación de una condición. Es decir, pueden ejecutar una secuencia de código en caso de que se cumpla una condición, y ejecutar una secuencia diferente o realizar un salto en el caso contrario.
+    </p>
+    <h2>
+        Estructuras y sintaxis
+    </h2>
+    <ul>
+        <li>
+            <h3>
+                Condición inicial
+            </h3>
+            <p>
+                Un condicional siempre comienza con la condición inicial, que se escribe de la siguiente manera:
+            </p>
+            <pre>
+                <code>
+if condicion:
+    accion1 # accion dentro del condicional
+    ...
+accion2 # accion fuera del condicional
+                </code>
+            </pre>
+            <p>
+                La condición evaluada, en principio, va a ser una expresión dada por un operador de comparación. Los operadores disponibles son:
+            </p>
+            <pre>
+                <code>
+== #(igual)
+!= #(distinto)
+> #(mayor)
+< #(menor)
+>= #(mayor o igual)
+<= #(menor o igual)                    
+                </code>
+            </pre>
+            <p>
+                A su vez, las expresiones se pueden combinar entre sí utilizando operadores lógicos o booleanos (and, or, etc.). Es importante, en caso de combinar expresiones, indicar el orden en que se deben realizar las mismas utilizando paréntesis (las expresiones entre paréntesis se evalúan primero).
+            </p>
+        </li>
+        <li>
+            <h3>
+                Condición secundaria:
+            </h3>
+            <p>
+                En caso de que la evaluación inicial devuelva un resultado negativo, se puede evaluar una segunda condición de la siguiente manera:
+            </p>
+            <pre>
+                <code>
+if condicion:
+    accion1 # accion dentro del condicional
+    ...
+elif condicion2:
+    accion2 # accion dentro de la condición secundaria
+    ...
+accion3 # accion fuera del condicional
+                </code>
+            </pre>
+        </li>
+        <li>
+            <h3>
+                Acción alternativa:
+            </h3>
+            <p>
+                En caso de querer realizar una acción cuando no se cumpla ninguna de las condiciones dadas, se debe realizar de la siguiente manera:
+            </p>
+            <pre>
+                <code>
+if condicion:
+    accion1 #accion dentro del condicional
+    ...
+elif condicion2:
+    accion2 #accion dentro de la condición secundaria
+    ...
+else:
+    accion3 #accion alternativa
+accion4 #accion fuera del condicional
+                </code>
+            </pre>
+        </li>
+    </ul>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
