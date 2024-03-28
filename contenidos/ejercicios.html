@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Ejercicios
+    </h1>
+    <p>
+        En el archivo de cada ejercicio se sugiere agregar un comentario inicial con la consigna y descripción de funcionamiento, y un comentario individual antes de las líneas más significativas que indique la acción que realizan.
+    </p>
+    <ol>
+        <li>
+            <p>
+                Escribir y ejecutar un programa que escriba una cadena de texto arbitraria (hello world).
+            </p>
+        </li>
+        <li>
+            <p>
+                Solicitar una cadena de texto al usuario, e imprimirla en pantalla a continuación del mensaje "Cadena de texto ingresada: "
+                <details>
+                    <summary>
+                        Resolución (spoiler!)
+                    </summary>
+                    <pre>
+                        <code>
+texto_ingresado = input("Ingrese una cadena de texto")
+print("Texo ingresado: " + texto_ingresado)
+                        </code>
+                    </pre>
+                </details>
+            </p>
+        </li>
+        <li>
+            <p>
+                Solicitar al usuario ingresar "ejercicio numero 3", verificar si efectivamente ingresó dicha cadena e imprimir el resultado en pantalla.
+            </p>
+        </li>
+        <li>
+            <p>
+                Solicitar el año de nacimiento al usuario, y calcular e imprimir la edad (ignorando el día y mes).
+            </p>
+        </li>
+        <li>
+            <p>
+                Recrear el programa anterior, pero ahora solicitando además el día y mes, y verificando la edad correctamente.
+            </p>
+        </li>
+        <li>
+            <p>
+                Crear un módulo de nombre <code style="padding:0 !important">mi_modulo</code> e implementar la siguiente función:
+            </p>
+            <pre>
+                <code>
+def suma(num1, num2):
+"""
+Devuelve la suma entre los números recibidos en num1, num2.
+"""
+                </code>
+            </pre>
+            <p>
+                Luego, importar el módulo desde otro archivo que:
+            </p>
+            <ul>
+                <li>
+                    Solicite al usuario el ingreso de dos números
+                </li>
+                <li>
+                    Realice la suma entre ambos utilizando la función del módulo
+                </li>
+                <li>
+                    Imprima el resultado de la suma en el terminal
+                </li>
+            </ul>
+        </li>
+        <li>
+            <p>
+                Agregar al módulo del punto anterior las funciones correspondientes a resta, multiplicación y división (respetando el orden de los parámetros para las operaciones). Luego, crear un archivo que:
+            </p>
+            <ul>
+                <li>
+                    Importe el módulo
+                </li>
+                <li>
+                    Solicite al usuario una operación a realizar ("suma","resta","multiplicacion","division")
+                </li>
+                <li>
+                    Solicite al usuario el ingreso de dos números
+                </li>
+                <li>
+                    Realice la operación correspondiente de acuerdo a la elección del usuario
+                </li>
+                <li>
+                    Imprima el resultado en el terminal
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
