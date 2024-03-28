@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Conversión de tipos
+    </h1>
+    <p>
+        Existen casos en los que se debe tratar con información que se encuentra almacenada con un tipo inadecuado.
+        <br/>
+        Ejemplos de esto pueden ser números codificados como cadenas de caracteres que se necesitan para realizar una operación matemática; o números almacenados como tales que se deben concatenar con una cadena de caracteres.
+        <br/>
+        Para esto, el lenguaje brinda una forma sencilla de convertir entre tipos de datos utilizando una función que tiene el mismo nombre que el tipo de destino.
+    </p>
+    <pre>
+        <code>
+variable1 = 472                 # tipo: int
+variable1_str = str(variable1)  # tipo: str
+# contiene "472"
+
+variable2 = "23586"             # tipo: str
+variable2_int = int(variable2)  # tipo: int
+# contiene 23586
+        </code>
+    </pre>
+    <p>
+        Este mecanismo funciona sin problemas para convertir a cadena de caracteres ya que prácticamente cualquier número puede expresarse como una secuencia de dígitos (a lo sumo agregando un signo y un punto decimal).
+        <br/>
+        Lo mismo no puede ser dicho al realizar conversiones a tipos numéricos, ya que no toda cadena de caracteres necesariamente contiene (únicamente) una secuencia de dígitos que represente un número.
+        <br/>
+        Existen mecanismos para verificar si una cadena de caracteres se puede convertir en un número, entre los cuales se encuentran:
+    </p>
+    <ul>
+        <li>
+            <p>
+                método <code style="padding:0 !important">isnumeric()</code> correspondiente al tipo <code style="padding:0 !important">str</code> 
+                <br/>
+                Devuelve un valor booleano que indica si el string representa o no un número. Sólo funciona con enteros positivos.
+            </p>
+        </li>
+        <li>
+            <p>
+                <code style="padding:0 !important">try, catch, except</code>
+                <br/>
+                Este método se utiliza siempre que se corre una función que <i>puede</i> arrojar un error al ejecutarse, realizando una acción alternativa y evitando que el programa se detenga.
+            </p>
+        </li>
+    </ul>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
