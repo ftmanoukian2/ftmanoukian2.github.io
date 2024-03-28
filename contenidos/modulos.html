@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Módulos
+    </h1>
+    <p>
+        Los módulos son archivos que contienen funcionalidad (módulos/clases) pero no constituyen un programa en sí. Son especialmente útiles para almacenar funcionalidad no específica del programa, ya que permiten una fácil reutilización del código, aunque también son una buena forma de separar la implementación del programa principal.
+        <br/>
+        Son la forma estándar de compartir código, por lo que toda la funcionalidad externa la encontraremos en forma de módulos.
+    </p>
+    <h2>
+        Forma de creación
+    </h2>
+    <p>
+        Los módulos son archivos con extensión <code style="padding:0 !important">.py</code>.
+        <br/>
+        Si el módulo es de creación propia, es conveniente que se encuentre en la misma ruta (o carpeta) que el archivo desde el que se lo importa.
+    </p>
+    <h2>
+        Sintaxis
+    </h2>
+    <ul>
+        <li>
+            <h3>    
+                Dentro del módulo
+            </h3>
+            <p>
+                Para el intérprete, un módulo es indistinguible de un archivo ejecutable ya que comparten tanto sintaxis como extensión. Las funciones o clases que puedan estar contenidas en un módulo deben respetar las reglas de indentación.
+            </p>
+        </li>
+        <li>
+            <h3>
+                Importación
+            </h3>
+            <p>
+                El lenguaje es muy flexible a la hora de importar módulos, y existen varias formas de hacerlo.
+            </p>
+            <ul>
+                <li>
+                    <h4>
+                        Módulo completo con referencia
+                    </h4>
+                    <p>
+                        Esta forma de importar requiere que cada llamado a una función contenida en el mismo sea referenciada. 
+                        <br/>
+                        Esto permite identificar fácilmente el origen de una función cuando el programa se vuelve largo o complejo, y es absolutamente necesario cuando existen funciones con el mismo nombre en diferentes módulos.
+                        <br/>
+                        La desventaja es que los llamados a función se vuelven largos, con lo cual el programa se vuelve más tedioso de leer. Para esto, existe la siguiente alternativa.
+                    </p>
+                    <pre>
+                        <code>
+# se importa el módulo utilizando el nombre del archivo
+# sin la extensión
+import nombre_de_modulo
+
+# para llamar una función dentro del módulo, se debe referenciar
+# al mismo utilizando su nombre
+nombre_de_modulo.nombre_de_funcion_en_modulo()
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    <h4>
+                        Módulo completo con referencia y alias
+                    </h4>
+                    <p>
+                        Similar al anterior, permite abreviar el nombre del módulo, contribuyendo a una mayor facilidad de lectura del programa.
+                    </p>
+                    <pre>
+                        <code>
+# se importa el módulo pero se especifica un "alias"
+# más corto que el nombre para referenciar al mismo
+import nombre_de_modulo as ndm
+
+# para llamar una función dentro del módulo, se debe referenciar
+# al alias
+ndm.nombre_de_funcion_en_modulo()
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    <h4>
+                        Funciones específicas sin referencia
+                    </h4>
+                    <p>
+                        Esta forma permite importar funciones o clases sin utilizar la referencia al módulo.
+                        <br/>
+                        En proyectos cortos, o con pocos módulos, permite más facilidad a la hora de escribir el programa aunque no es recomendado en proyectos más grandes.
+                    </p>
+                    <pre>
+                        <code>
+# en lugar de importar el módulo completo, se especifica su nombre
+# y la función (o funciones, separadas con coma) a importar
+from nombre_de_modulo import nombre_de_funcion_en_modulo
+
+# la función importada de esta forma no debe ser referenciada
+# al módulo que la contieen
+nombre_de_funcion_en_modulo()
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    <h4>
+                        Otras formas
+                    </h4>
+                    <p>
+                        Las últimas dos formas se pueden combinar, permitiendo utilizar un alias para llamar a una función individual sin referenciarla. Esto permite reducir aún más el largo del programa, aunque dificulta la comprensión del mismo a medida que crece.
+                    </p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
