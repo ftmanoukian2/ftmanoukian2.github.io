@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Interacción a través del terminal
+    </h1>
+    <p>
+        En esta etapa inicial de aprendizaje del lenguaje, la interacción del programa con el usuario la manejaremos a través del terminal. Para esto, Python cuenta con dos funciones que nos permitirán entregar y recibir información en forma de texto.
+    </p>
+    <h2>
+        print()
+    </h2>
+    <p>
+        La función <code style="padding:0 !important">print()</code> imprime una cadena de texto que recibe como parámetro.
+        <br/>
+        La función no necesariamente debe recibir un dato de tipo <code style="padding:0 !important">str</code> sino que está preparada para formatear diferentes tipos (por ejemplo, numéricos).
+    </p>
+    <pre>
+        <code>
+print("Hola mundo")
+print(12345)
+print(3.14159)
+        </code>
+    </pre>
+    <p>
+        Puede recibir diferentes piezas de información a imprimir (lo cual es útil cuando se quieren imprimir datos de distinto tipo en conjunto) como argumentos individuales.
+    </p>
+    <pre>
+        <code>
+print("Estamos en el año ", 2024)
+        </code>
+    </pre>
+    <h2>
+        input()
+    </h2>
+    <p>
+        La función <code style="padding:0 !important">input()</code> captura la cadena de texto ingresada por el usuario a través del terminal, y la devuelve como valor de retorno. En todos los casos, el texto ingresado por el usuario se devuelve con el tipo <code style="padding:0 !important">str</code> y debe ser ajustada al tipo necesario por el programa.
+    </p>
+    <pre>
+        <code>
+entrada_usuario = input()
+        </code>
+    </pre>
+    <p>
+        La función puede ser utilizada por sí sola, aunque opcionalmente puede recibir como parámetro un texto a imprimir para indicar al usuario que se quiere recibir información.
+    </p>
+    <pre>
+        <code>
+entrada_usuario = input("Ingresar texto a continuación:")
+
+# equivalente a:
+# print("Ingresar texto a continuación:")
+# entrada_usuario = input()
+        </code>
+    </pre>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
