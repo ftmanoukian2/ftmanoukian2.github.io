@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Bucles
+    </h1>
+    <p>
+        Los bucles son estructuras de control que permiten ejecutar un bloque de código de forma repetida.
+        <br/>
+        Existen dos tipos de bucle en Python, uno con una cantidad indeterminada de repeticiones - <code style="padding:0 !important">while</code> - y otro con una cantidad determinada - <code style="padding:0 !important">for</code> - .
+        <br/>Denominaremos <i>iteración</i> a cada una de las repeticiones que se da en la ejecución de un bucle.
+    </p>
+    <h2>
+        while
+    </h2>
+    <p>
+        La ejecución de este tipo de bucles está determinada por una condición booleana. La comprobación de esta condición se realiza antes de cada iteración, por lo que el cumplimiento de la condición debe poder darse dentro de una de las iteraciones del ciclo (de lo contrario, el programa nunca podría continuar mas allá del bucle).
+    </p>
+    <h3>
+        Sintaxis
+    </h3>
+    <pre>
+        <code>
+while condicion:
+    accion1       # accion realizada de forma repetida
+
+accion2           # accion realizada al finalizar el bucle
+        </code>
+    </pre>
+    <details>
+        <summary>
+            <b style="font-size: 13pt;">Ejemplos</b>
+            <!-- no anduvo con h3 -->
+        </summary>
+        <pre>
+            <code>
+variable = 0
+
+# el siguiente bucle se repite 10 veces
+while variable < 10:
+    # si la variable no se modificara durante el bucle,
+    # el programa no podría continuar más allá.
+    variable = variable + 1
+
+    print(variable)
+
+print("bucle finalizado")
+            </code>
+        </pre>
+        <pre>
+            <code>
+# solicito un número al usuario
+numero_ingresado = input("Ingresar un número")
+
+# el bucle se inicia sólo si el usuario no ingresó un numero válido.
+# se va a repetir hasta que el usuario ingrese un número, 
+# solicitando uno nuevo por cada repetición.
+while numero_ingresado.isnumeric() == False:
+    numero_ingresado = input("No ingresó un número. Por favor ingresar un número")
+
+numero_ingresado = int(numero_ingresado)
+print(numero_ingresado)
+            </code>
+        </pre>
+    </details>
+    <h2>
+        for
+    </h2>
+    <p>
+        Este tipo de bucles está asociado a un conjunto de elementos agrupados, el cual se denomina <i>iterable</i>. La cantidad de iteraciones a realizar se corresponderá con la cantidad de elementos pertenecientes al iterable, y, en cada iteración, una variable se asociará a cada uno de los elementos de forma individual. 
+        
+    </p>
+    <h3>
+        Iterables
+    </h3>
+    <p>
+        La categoría <i>iterable</i> no se asocia a un tipo de dato particular, sino a objetos que están compuestos por elementos individuales, sea cual sea su tipo.
+        Ejemplos de objetos iterables son:
+    </p>
+    <ul>
+        <li>
+            Listas (sea cual sea el tipo que contiene, incluyendo listas con elementos de distintos tipos)
+        </li>
+        <li>
+            Strings
+        </li>
+        <li>
+            Tuplas
+        </li>
+        <li>
+            Rangos (<code style="padding:0 !important">range()</code>)
+        </li>
+    </ul>
+    <h3>
+        Sintaxis
+    </h3>
+    <pre>
+        <code>
+for elemento in objeto_iterable:
+    accion1     # accion realizada en todas las iteraciones
+
+accion2         # accion realizada al finalizar el bucle
+        </code>
+    </pre>
+    <details>
+        <summary style="font-size: 13pt;">
+            <b>
+                Ejemplos
+            </b>
+        </summary>
+        <pre>
+            <code>
+    # el siguiente bucle se repite 10 veces, imprimiendo los números 0-9.
+    for i in range(10):
+        print(i)
+            </code>
+        </pre>
+        <p>
+            La declaración del bucle mostrada en este ejemplo es totalmente válida para los casos en que se requiera repetir un bloque de código una determinada cantidad de veces, por más que no se utilice la variable 'i' (en cuyo caso debe ignorarse dentro del bloque).
+        </p>
+        <pre>
+            <code>
+    texto = "Hola"
+    
+    # el siguiente bucle imprime, uno por uno, 
+    # los caracteres que conforman la variable "texto"
+    for letra in texto:
+        print(letra)
+            </code>
+        </pre>
+    </details>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
