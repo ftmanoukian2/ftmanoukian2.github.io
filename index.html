@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
 <body>
     <h1>
         Documentación BD 2024
