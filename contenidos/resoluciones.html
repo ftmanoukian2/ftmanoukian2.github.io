@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h2>
+        Listas
+    </h2>
+    <!--EJERCICIO 1,2-->
+    <details>
+        <summary>
+                1,2
+        </summary>
+        <p>
+            En primer lugar, debemos crear la lista con los elementos propuestos:
+        </p>
+        <pre>
+            <code>
+lista = ['manzana','banana','naranja','uva','pera']
+            </code>
+        </pre>
+        <p>
+            Luego, tenemos que reemplazar el elemento <tt>"manzana"</tt> por el elemento <tt>"pera"</tt>. Dado que los elementos en una lista se identifican a través de un <b>índice</b>, debemos encontrar en qué posición se encuentra el elemento <tt>manzana</tt>. Las listas cuentan con un método llamado <tt>index()</tt> que devuelve la posición en la que se encuentra el elemento provisto como argumento. En caso de haber más de una aparición, devuelve únicamente la primera.
+        </p>
+        <pre>
+            <code>
+indice_manzana = lista.index('manzana')
+            </code>
+        </pre>
+        <p>
+            Ya localizamos el elemento a reemplazar, y ahora debemos reemplazarlo. Propondremos dos formas distintas de proceder ante esta consigna.
+        </p>
+        <ul>
+            <li>
+                En la <b>forma 1</b> vamos a localizar el elemento, removerlo de la lista e insertar un nuevo elemento en la misma posición.
+            </li>
+            <li>
+                En la <b>forma 2</b> vamos a modificar el contenido del elemento en la posición encontrada, sin remover ni agregar elementos.
+            </li>
+        </ul>
+        <pre>
+            <code>
+# forma 1
+lista.pop(indice_manzana)
+lista.insert(indice_manzana,'pera')
+
+# forma 2
+lista[indice_manzana] = 'pera'
+            </code>
+        </pre>
+        <p>
+            En este caso ambas formas son totalmente válidas.
+        </p>
+    </details>
+    <!--EJERCICIO 3-->
+    <details>
+        <summary>
+            3
+        </summary>
+        <p>
+            Debemos crear una función que devuelva la suma de todos los elementos de una lista que recibe como parámetro. Primero pensemos en la operación fuera del contexto de una función, para implementarla cuando estemos seguros del funcioamiento.
+            <br/>
+            Si conociéramos la cantidad de elementos de la lista, podríamos hacer lo siguiente:
+        </p>
+        <pre>
+            <code>
+lista = [1,2,3,4,5]
+resultado = lista[0] + lista[1] + lista[2] + lista[3] + lista[4]
+            </code>
+        </pre>
+        <p>
+            Pero esto no tiene en cuenta la posibilidad de que la lista no contenga 5 elementos. (¿tenés dudas? ¡probalo! cambiá la cantidad de elementos de la lista y observá el resultado).
+            <br/>
+            Podemos preguntarnos cómo haríamos la operación de forma manual, en papel, y ver si podemos implementarla en código. Generalmente la forma en que operaríamos sería la siguiente:
+            <ul>
+                <li>
+                    Sumamos los primeros dos números, y el resultado lo almacenamos en nuestra memoria. A este resultado vamos a ponerle el nombre de <i>suma parcial</i> para explicar el procedimiento a continuación.
+                </li>
+                <li>
+                    Pasamos al tercer número, y lo sumamos con el resultado de la <i>suma parcial</i> del paso anterior. En este momento nos "olvidamos" del número anterior, y en su lugar nos acordamos del que acabamos de obtener. Podemos decir que estamos "actualizando" el valor de la <i>suma parcial</i>.
+                </li>
+                <li>
+                    Repetimos el paso anterior, número a número, hasta llegar al final de la lista. En este momento, la <i>suma parcial</i> ya contiene la suma de todos los números, y por ende el resultado que estamos buscando. Problema solucionado!
+                </li>
+            </ul>
+            <p>
+                ¿Conocemos alguna forma de realizar una acción de forma repetida con todos los elementos de una lista? 👀
+                <br/>
+                <i>¡Claro que sí!</i> Podemos utilizar un bucle <i>for</i>, utilizando la lista como elemento iterable. Aunque, a priori, según el procedimiento que planteamos antes los primeros dos valores de la lista reciben un tratamiento diferente. 
+                <br/>
+                Podemos darle una vuelta a esto, pensando en que al principio en realidad también tenemos una <i>suma parcial</i>, sólo que su valor es 0. A esa <i>suma parcial</i> le sumamos el primer número. De esta forma, acabamos de <i>transformar</i> al primer paso para que el procedimiento sea el mismo que el del resto de los pasos.
+                <br/>
+                En resumen, la propuesta es <i>realizar una misma acción</i> con todos los elementos de la lista, que consiste en sumar cada elemento con una variable que almacena el resultado paso a paso. Al finalizar la secuencia de repetición, la variable contendrá el resultado esperado.
+            </p>
+        </p>
+        <pre>
+            <code>
+suma_parcial = 0
+
+for numero in lista:
+    suma_parcial = suma_parcial + numero
+
+# cuando se llega a este punto, suma_parcial contiene el resultado
+            </code>
+        </pre>
+        <p>
+            Falta resolver la salvedad que hicimos al principio, que es que todavía no lo implementamos como función. Podemos utilizar el mismo código, aunque ahora la lista no vamos a definirla <i>dentro de la función</i> sino que vamos a esperar recibirla como parámetro. Y, a la vez, el resultado no lo vamos a dejar en la variable (ya que se borra al terminar de ejecutarse la función) sino que lo vamos a devolver como valor de retorno. El programa final debería quedar de la siguiente manera:
+        </p>
+        <pre>
+            <code>
+def suma_lista(lista_numeros):
+
+    suma_parcial = 0
+
+    for numero in lista_numeros:
+        suma_parcial = suma_parcial + numero
+
+    return suma_parcial
+            </code>
+        </pre>
+        <p>
+            Y, para cumplir con la prueba que pide la consigna, tenemos que llamar a la función de la siguiente manera:
+        </p>
+        <pre>
+            <code>
+print(suma_lista([1,2,3,4,5]))
+            </code>
+        </pre>
+    </details>
+
+    <!--EJERCICIO 4-->
+    <details>
+        <summary>
+            4
+        </summary>
+        <p>
+            Lo primero que pide la consigna es crear una lista que contenga un tablero completo de ta-te-tí. Esta lista, a su vez, debe contener la información en forma de listas individuales que contienen la información de cada fila. 
+            <br/>
+            Como aclaración, <b>no nos pide que implementemos la funcionalidad del juego</b>, solamente la información de las casillas de un tablero que ya se está jugando.
+            <br/>
+            Las filas se podrían ver de la siguiente manera (inventando mi propia partida):
+        </p>
+        <pre>
+            <code>
+fila1 = ['X','O','X']  
+fila2 = ['X','-','O']
+fila3 = ['O','X','O']
+            </code>
+        </pre>
+        <p>
+            Con lo cual la creación de este tablero sería:
+        </p>
+        <pre>
+            <code>
+tablero = [['X','O','X'],['X','-','O'],['O','X','O']]
+            </code>
+        </pre>
+        <p>
+            ¡Ya resolvimos la primera mitad del ejercicio! Ahora queda la segunda parte: imprimir el resultado.
+            <br/>
+            Una forma <i>muy simplificada</i> de resolver esta parte es, directamente, llamar a la función <tt>print</tt> pasando la tabla como parámetro. De esta forma podemos observar los valores individuales, pero el formato no asemeja a un tablero de ta-te-tí.
+            <br/><br/>
+            Por ahora no contamos con una herramienta de dibujo, pero podemos utilizar los caracteres '|' (alt + 1) para hacer líneas verticales, '-' para hacer líneas horizontales y '+' para hacer intersecciones entre líneas. Utilizando este recurso, podemos graficar de la siguiente manera:
+        </p>
+        <pre>
+            <code>
+print(' ',tablero[0][0],' | ',tablero[0][1],' | ',tablero[0][2])
+print('---+---+---')
+print(' ',tablero[1][0],' | ',tablero[1][1],' | ',tablero[1][2])
+print('---+---+---')
+print(' ',tablero[2][0],' | ',tablero[2][1],' | ',tablero[2][2])
+
+
+"""
+veremos lo siguiente en el terminal:
+
+     X | O | X 
+    ---+---+---
+     X | - | O 
+    ---+---+---
+     O | O | O 
+"""
+            </code>
+        </pre>
+        <p>
+            Sin embargo, podemos ver que, si bien el código anterior no es extenso, hay instrucciones muy parecidas. Entre las líneas 1, 3 y 5 lo único que cambia es el número de fila. Podemos simplificar el procedimiento de la siguiente forma:
+        </p>
+        <pre>
+            <code>
+#en esta variable se guarda la cantidad de elementos que contiene la lista principal (cantidad de filas en este caso)
+filas = len(tablero)
+
+for numero_fila in range(filas):
+    print(' ',tablero[numero_fila][0],' | ',tablero[numero_fila][1],' | ',tablero[numero_fila][2])
+    
+    # en caso de que la fila NO sea la última, imprimo la separación horizontal
+    if numero_fila != filas - 1:
+        print('---+---+---')
+            </code>
+        </pre>
+        <p>
+            Con esta forma seguimos teniendo 5 líneas de código... te podrás preguntar: ¿qué simplificamos? En este caso particular nada, pero imaginate cómo cambiarían los dos ejemplos si en vez de un tablero de 3 filas quisiéramos imprimir un tablero de 10 filas. ¿Cómo afectaría esto a la longitud de cada ejemplo? (Si tenés dudas, ¡probalo!)
+        </p>
+    </details>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
