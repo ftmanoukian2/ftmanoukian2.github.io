@@ -9,6 +9,130 @@
     </script>
 </head>
 <body>
+    <h1>
+        Listas
+    </h1>
+    <p>
+        La lista es un tipo de dato utilizado para almacenar una colección ordenada de elementos. Estos elementos pueden ser de cualquier tipo de dato, incluyendo números, cadenas de texto, otras listas e incluso elementos más complejos.
+    </p>
+    <h2>
+        Características principales
+    </h2>
+    <ul>
+        <li>
+            <b>Colección Ordenada:</b> Los elementos en una lista están organizados en un orden específico, lo que significa que cada elemento tiene una posición única dentro de la lista. Esta posición se conoce como índice y comienza desde 0 para el primer elemento de la lista.
+        </li>
+        <li>
+            <b>Flexibilidad de Contenido:</b> Una lista puede contener elementos de diferentes tipos de datos, lo que permite almacenar una variedad de valores en una sola estructura de datos.
+        </li>
+        <li>
+            <b>Mutabilidad:</b> Las listas en Python son mutables, lo que significa que pueden ser modificadas después de su creación. Los elementos de una lista pueden ser agregados, eliminados o modificados según sea necesario.
+        </li>
+        <li>
+            <b>Acceso y Modificación:</b> Los elementos individuales de una lista pueden ser accedidos y modificados mediante su índice. Esto permite realizar operaciones como la lectura de valores, la asignación de nuevos valores y la manipulación de elementos existentes.
+        </li>
+        <li>
+            <b>Iterabilidad:</b> Las listas son iterables, lo que significa que se pueden recorrer fácilmente utilizando bucles for y otras estructuras de control de flujo.
+        </li>
+    </ul>
+    <h2>
+        Ejemplos de declaración de listas
+    </h2>
+    <pre>
+        <code>
+# lista con 5 elementos tipo str
+frutas = ["manzana", "banana", "naranja", "uva", "pera"]
+
+# lista vacia
+lista_vacia = []
+
+# lista de listas
+lista_de_listas = [[1,2,3],[4,5,6,7,8]]
+        </code>
+    </pre>
+    <h2>
+        Ejemplos de acceso a listas
+    </h2>
+    <pre>
+        <code>
+# acceso en lista simple
+frutas[0]               # devuelve 'manzana'
+frutas[-1]              # recorre de atrás hacia adelante, devuelve 'pera'
+
+# acceso en lista de listas
+lista_de_listas[1]      # devuelve [4,5,6,7,8]
+lista_de_listas[1][3]   # devuelve 7
+        </code>
+    </pre>
+    <p>
+        Las listas permiten acceder a un subconjunto de los datos que contienen, dado por un par de índices mínimo y máximo. Opcionalmente, se puede agregar un parámetro correspondiente a la distancia entre índices.
+    </p>
+    <h3>
+        Sintaxis de subconjuntos
+    </h3>
+    <pre>
+        <code>
+lista[minimo:maximo]
+lista[minimo:maximo:distancia]
+        </code>
+    </pre>
+    <ul>
+        <li>
+            <b>minimo:</b> el índice a partir del cual comienza el subconjunto.
+        </li>
+        <li>
+            <b>maximo:</b> el tope superior (no incluido) de índices hasta el cual llega el subconjunto.
+        </li>
+        <li>
+            <b>distancia:</b> la distancia entre los índices con los que se forma el subconjunto. Este parámetro es opcional
+        </li>
+    </ul>
+    <p>
+        En caso de no proveer alguno de los valores, los mismos se autocompletan de la siguiente manera: mínimo 0, máximo -1 y distancia 1.
+        <br/>
+        Esto es especialmente útil si se busca respetar alguno de los extremos de la lista en el subconjunto.
+    </p>
+    <h3>
+        Ejemplos de subconjuntos
+    </h3>
+    <pre>
+        <code>
+lista[::2]      # devuelve una lista con todos los elementos con índice par
+lista[:5]       # devuelve los elementos con índice entre 0 y 4 incluídos
+lista[10:]      # devuelve los elementos con índice 10 en adelante
+lista[::-1]     # devuelve la lista en orden inverso
+        </code>
+    </pre>
+    <h2>
+        Métodos de listas
+    </h2>
+    <p>
+        Los métodos son funciones que corresponden a un tipo de dato en particular. Hay múltiples métodos que permiten simplificar la operación con listas, algunos de los cuales se ejemplifican a continuación:
+    </p>
+    <pre>
+        <code>
+lista.count(elemento)
+# devuelve la cantidad de apariciones de 'elemento' en la lista
+
+lista.index(elemento)
+# si 'elemento' se encuentra en la lista, devuelve la posicion de la primera aparición
+
+lista.append(elemento)
+# agrega 'elemento' al final de la lista
+
+lista.pop(indice)
+# remueve el elemento en la posición 'indice', y lo devuelve en forma de retorno
+
+lista.insert(indice,elemento)
+# desplaza todos los elementos a partir de 'indice'
+# una posición a la derecha, e inserta 'elemento' en su lugar
+        </code>
+    </pre>
+    <p>
+        La mayoría de estos métodos son también aplicables a datos de tipo 'str', que actúan como listas cuyos elementos son los caracteres que las conforman.
+        <br/>
+        En el siguiente <a href="https://docs.python.org/3/tutorial/datastructures.html">enlace</a> se encuentran listados todos los métodos.
+    </p>
     <footer>
         <a href="../index.html">Volver al índice</a>
     </footer>
