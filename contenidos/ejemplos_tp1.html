@@ -347,6 +347,296 @@ def verificar_primo(valor):
         <br/><br/>
         No está demás aclarar que la tarea de esta función <b>no es</b> convertir los números de <i>str</i> a <i>float</i> o <i>int</i>, sino devolver un valor booleano que indique si es posible o no realizar la conversión. Para convertir, el lenguaje ya nos proporciona las funciones <i>float()</i> e <i>int()</i>.
     </p>
+    <h4>
+        ¿Cómo identificamos un string que representa un número entero positivo?
+    </h4>
+    <p>
+        Los datos de tipo str están compuestos por caracteres. Para que un str represente un valor numérico entero y positivo, <b>todos sus caracteres</b> deben contener <b>exclusivamente</b> alguno de los siguientes valores: '0','1','2','3','4','5','6','7',8' ó '9'.
+    </p>
+    <div style="background-color: lightpink; padding: 0.1rem 1em;">
+        <h4>
+            <i>Forma 1</i>
+        </h4>
+        <p>
+            Podríamos pensar en utilizar una estrategia similar a la aplicada en el ejercicio anterior: inicialmente asumimos que la cadena <i>sí representa un dato numérico</i>, y en caso de encontrar un caracter con un valor diferente al esperado <i>desmentimos la hipótesis inicial.</i>
+            <br/>
+            Sin embargo, surge un problema: la cantidad de valores que puede tomar un caracter que no son dígitos numéricos es muy grande: tenemos las letras en minúscula, mayúscula, símbolos... y se torna difícil preguntar si cada valor contiene alguno de estos elementos.
+            <br/>
+            En este caso, descartaremos esta idea ya que, al menos inicialmente, no se presenta una forma fácil de implementarla.
+        </p>
+    </div>
+    <div style="height:1em"></div>
+    <div style="background-color: lightgreen; padding: 0.1rem 1em;">
+        <h4>
+            <i>Forma 2</i>
+        </h4>
+        <p>
+            Dado que la cantidad de caracteres válidos es mucho menor que la cantidad total de caracteres que puede contener un string, podemos establecer una forma de trabajo diferente: 
+            <br/>
+            En primer lugar, contamos la cantidad de apariciones de los elementos válidos. Es decir, preguntamos: ¿Cuántas veces aparece el caracter '0'? ¿Cuántas veces aparece el caracter '1'? Y así sucesivamente.
+            <br/>
+            Luego, sumamos todas las cantidades obtenidas. Si el str sólo contiene caracteres numéricos, la cantidad sumada debería ser igual que el largo propio del str. Algunos ejemplos a continuación:
+        </p>
+        <ul>
+            <li>
+                <b>'1111'</b> contiene 4 caracteres. La cantidad de apariciones de '1' es igual a 4, y la cantidad de apariciones del resto de dígitos es 0. Por tanto, la suma de cantidad de dígitos y el largo son iguales.
+            </li>
+            <li>
+                <b>'12345678</b> contiene 8 caracteres. Todos los dígitos entre '1' y '8' aparecen una vez (suman 8 apariciones), y '0' y '9' no aparecen ninguna vez por lo que no suman. Nuevamente, el largo y la suma coinciden.
+            </li>
+            <li>
+                <b>'a789'</b> contiene 4 caracteres. '7', '8' y '9' aparecen una vez y el resto de dígitos ninguna, por lo que la suma es igual a 3. En este caso, la suma y el largo <b>no coinciden</b>, ya que hay un caracter no numérico. 
+            </li>
+        </ul>
+        <p>
+            Este método es muy útil, y contamos con el método 'count()' para contar la cantidad de apariciones. Por lo tanto, lo implementaremos a continuación.
+        </p>
+    </div>
+    <h3>
+        Implementación
+    </h3>
+    <p>
+        En primer lugar, definiremos un string de prueba dentro del script para realizar las pruebas. Debemos modificar este string asignandole diferentes valores para comprobar el funcionamiento correcto del código que vamos a escribir.
+    </p>
+    <pre>
+        <code>
+str_prueba = '1234567'
+        </code>
+    </pre>
+    <p>
+        Luego, debemos sumar la cantidad de apariciones de cada dígito dentro de <i>str_prueba</i>. El método <i>count()</i> permite contar las apariciones de un único elemento cada vez, por lo que debemos utilizarlo una vez por cada caracter entre '0' y '9'.
+        <br/>
+        Dado que tenemos que realizar una acción de forma repetida, y conocemos los elementos con los que se debe realizar dicha acción, rápidamente podemos concluir que la herramienta adecuada es un bucle <i>for</i>.
+        <br/>
+        Y, antes de escribir el código, debemos definir dónde almacenaremos la suma total de apariciones. En lugar de contar todas las apariciones y hacer la suma al final, podemos ir sumando la cantidad de apariciones de cada elemento a una variable, de forma que al finalizar el bucle contenga la suma total.
+    </p>
+    <pre>
+        <code>
+suma_digitos_numericos = 0
+
+for digito in '0123456789':
+    cantidad_digito_actual = str_prueba.count(digito)
+    suma_digitos_numericos = suma_digitos_numericos + cantidad_digito_actual
+        </code>
+    </pre>
+    <p>
+        Te podrás preguntar: <i>¿Por qué el objeto iterable es un str que tiene todos los dígitos del 0 al 9, y no es un iterable 'range()'?</i>
+        <br/>
+        En este caso, queremos contar la cantidad de apariciones de <b>los caracteres que representan los dígitos numéricos</b>. Es decir, no queremos contar cuántas veces aparece el número 9 sino cuántas veces aparece el caracter '9'.
+        <br/>
+        Al utilizar un str como objeto iterable, la variable del bucle va a tomar de los valore de cada caracter del str. En este caso, va a tomar los valores: '0', '1', '2', ..., '9'.
+    </p>
+    <div style="height: 1em;"></div>
+    <p>
+        Ya calculamos el valor que necesitábamos pero aún no realizamos la comprobación. A modo de recordatorio, <i>necesitamos comprobar si la longitud del str equivale a la cantidad de dígitos numéricos que contiene</i>.
+    </p>
+    <pre>
+        <code>
+if suma_digitos_numericos == len(str_prueba):
+    print("El valor analizado representa un número entero y positivo")
+else:
+    print("El valor analizado no representa un número entero y positivo")
+        </code>
+    </pre>
+    <p>
+        Y, unificando todo el código:
+    </p>
+    <pre>
+        <code>
+str_prueba = '1234567'
+
+suma_digitos_numericos = 0
+
+for digito in '0123456789':
+    cantidad_digito_actual = str_prueba.count(digito)
+    suma_digitos_numericos = suma_digitos_numericos + cantidad_digito_actual
+
+if suma_digitos_numericos == len(str_prueba):
+    print("El valor analizado representa un número entero y positivo")
+else:
+    print("El valor analizado no representa un número entero y positivo")
+        </code>
+    </pre>
+    <p>
+        Probá ejecutar este script, modificando el valor de 'str_prueba' tanto con cadenas numéricas como con cadenas que tengan otros caracteres inválidos.
+    </p>
+    <h4>
+        ¿Qué pasa con los números con coma y/o negativos?
+    </h4>
+    <p>
+        En un principio decidimos reducir el problema para simplificar la resolución. Sin embargo, debemos cumplir con todos los requerimientos planteados. Ahora debemos incluir soporte para todo tipo de números... ¡A no desesperar! Vamos a preguntarnos: ¿Cómo cambia el proceso de verificación entre los números enteros positivos (que acabamos de realizar) y el resto?
+    </p>
+    <ul>
+        <li>
+            Punto decimal: solamente puede aparecer <b>un</b> punto ('.') a lo largo de toda la cadena. Si no aparece ninguno, no hay inconveniente. Pero, si hay más de uno, la cadena <b>no</b> representa un número.
+        </li>
+        <li>
+            Signo menos: solamente puede aparecer <b>un</b> signo menos ('-') en la primer posición de la cadena. Si aparece un signo menos en cualquier otra posición, la cadena <b>no</b> representa un número.
+        </li>
+    </ul>
+    <p>
+        ¡Eso es todo con respecto a los cambios! Vamos a buscar una forma de implementar las verificaciones correspondientes.
+        <br/>
+        Una forma de hacer esto es verificar primero las pautas que acabamos de definir. Si comprobamos que se cumplen, podemos remover los símbolos de la cadena (si es que había un '.' o un '-'), en cuyo caso nos quedarán <b>únicamente los dígitos numéricos</b>, y podremos efectuar la verificación que realizamos para números enteros positivos. 
+        <br/><br/>
+        Algunos ejemplos a continuación:
+    </p>
+    <ul>
+        <li>
+            <b>'43-567.'</b> contiene un '.' (válido) pero contiene un '-' en una posición que no es la primera. Por ende, esta cadena no representa un número y no necesitamos continuar con la verificación.
+        </li>
+        <li>
+            <b>-728</b> no contiene '.', y contiene un '-' en la primera posición. Como cumple las reglas, removemos el '-' y nos queda '728'. Con este valor ahora podemos hacer la comprobación de entero positivo, que dará verdadero.
+        </li>
+        <li>
+            <b>-abc.7hjklm</b> contiene un '.' y un '-' en la primera posición. Como cumple las reglas, removemos ambos símbolos y nos queda 'abc7hjklm'. Con este valor realizamos la comprobación de entero positivo, que dará falso.
+        </li>
+    </ul>
+    <div style="background-color:gainsboro; padding: 0.1em 1em;">
+        <p>
+            Aclaración: Los str aceptan la mayoría de métodos de listas, como 'count()' o 'index()', pero son un dato de tipo <b>inmutable</b>. Esto quiere decir que su contenido no se puede alterar, por lo que métodos como 'pop()' no funcionarán. 
+            <br/>
+            Para esto, podemos hacer una conversión de tipo str -> list, tras lo cual podremos modificar libremente el contenido.
+        </p>
+    </div>
+    <pre>
+        <code>
+str_prueba = list(str_prueba) # convierto de tipo para poder remover elementos
+es_valido = True
+
+# verificación de símbolo '-' fuera de la primer posición
+# str_prueba[1:] devuelve una copia de la lista desde el elemento 1 
+# hasta el último (sin incluir el elemento 0)
+if str_prueba[1:].count('-') > 0: 
+    es_valido = False
+
+# verificación de cantidad de '.'
+if str_prueba.count('.') > 1:
+    es_valido = False
+
+# eliminación de símbolos
+# si hay un solo '-', y es el primer caracter
+if str_prueba.count('-') == 1:
+    if str_prueba[0] == '-':
+        str_prueba.pop(0)
+
+# si hay un '.'
+if str_prueba.count('.') == 1:
+    str_prueba.pop(str.index('.'))
+
+if es_valido == True:
+    str_prueba = '1234567'
+
+    suma_digitos_numericos = 0
+
+    for digito in '0123456789':
+        cantidad_digito_actual = str_prueba.count(digito)
+        suma_digitos_numericos = suma_digitos_numericos + cantidad_digito_actual
+
+    if suma_digitos_numericos == len(str_prueba):
+        print("El valor analizado representa un número entero y positivo")
+    else:
+        print("El valor analizado no representa un número entero y positivo")
+        </code>
+    </pre>
+    <h4>
+        Algunas verificaciones extra
+    </h4>
+    <p>
+        Podríamos creer que nuestra secuencia ya analiza correctamente todos los casos, pero nunca está demás verificar esta afirmación.
+        <br/>
+        Volvamos a pensar en el código para verificar <i>enteros positivos</i> que escribimos más arriba. ¿Qué pasa cuando el usuario ingresa un str de longitud 0? (Esto ocurre cuando el usuario presiona Intro sin haber escrito nada).
+        <br/>
+        La condición para que el str represente un número es que la cantidad de caracteres sea igual a la suma de los caracteres que representan dígitos. En este caso, el largo es 0 y la cantidad de dígitos también es 0, por lo que la función devolvería un resultado errado.
+        <br/>
+        Por ende, antes de realizar la verificación de número entero positivo tenemos que verificar que la longitud del str sea mayor a 0:
+    </p>
+    <pre>
+        <code>
+if len(str_prueba) == 0:
+    es_valido = False
+        </code>
+    </pre>
+    <p>
+        En el caso del código que verifica que sea un número <b>real</b> (que fue lo último que implementamos), debemos tener un cuidado extra. En este caso, el usuario podría ingresar, en lugar de un str vacío, algo que contenga los signos (y respete las reglas) pero que no tenga caracteres numéricos. Esto podría ser:
+    </p>
+    <ul>
+        <li>
+            <b>"-"</b>
+        </li>
+        <li>
+            <b>"."</b>
+        </li>
+        <li>
+            <b>"-."</b>
+        </li>
+    </ul>
+    <p>
+        En estos casos, las primeras verificaciones se cumplirían, y la longitud de ellos <b>no es 0</b>. Por ende, tenemos que realizar la verificación de longitud <i>luego de haber removido los símbolos del str</i>. Esto sería, antes de hacer la verificación de número entero.
+    </p>
+    <h3>
+        Transformando el código en una función
+    </h3>
+    <p>
+        El último paso necesario para cumplir con los requerimientos propuestos es englobar todas las acciones en una función, para poder utilizarla de ahora en más.
+        <br/>
+        Tenemos que recordar que, al igual que antes, esta función no va a poder "ver" el contenido de las variables del script principal, sino que va a recibir la información en forma de un parámetro, y tiene que devolver el resultado como valor de retorno.
+    </p>
+    <p>
+        <i>
+            archivo funciones_tp1.py
+        </i>
+    </p>
+    <pre>
+        <code>
+def verificar_float(str_a_probar):
+    str_a_probar = list(str_a_probar)
+    es_valido = True
+
+    if str_a_probar[1:].count('-') > 0: 
+        es_valido = False
+
+    if str_a_probar.count('.') > 1:
+        es_valido = False
+
+    if str_prueba.count('-') == 1:
+        if str_prueba[0] == '-':
+            str_prueba.pop(0)
+
+    if str_a_probar.count('.') == 1:
+        str_a_probar.pop(str.index('.'))
+
+    if len(str_a_probar) == 0:
+        es_valido = False
+
+    if es_valido == True:
+        suma_digitos_numericos = 0
+
+        for digito in '0123456789':
+            cantidad_digito_actual = str_a_probar.count(digito)
+            suma_digitos_numericos = suma_digitos_numericos + cantidad_digito_actual
+
+        if suma_digitos_numericos != len(str_a_probar):
+            es_valido = False
+    
+    return es_valido
+        </code>
+    </pre>
+    <p>
+        Y podemos evaluar su funcionamiento llamándolo desde un script externo (por ejemplo, prueba_verificacion_float.py):
+    </p>
+    <pre>
+        <code>
+import funciones_tp1
+
+str_entrada = input('Ingrese un valor para verificar si representa un número real: ')
+
+if funciones_tp1.verificar_float(str_entrada) == True:
+    print("El valor " + str_entrada + " representa un número real")
+else:
+    print("El valor " + str_entrada + " no representa un número real")
+        </code>
+    </pre>
     <footer>
         <a href="../index.html">Volver al índice</a>
     </footer>
