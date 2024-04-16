@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Ejemplos de resolución de problemas de TP1
+    </h1>
+    <p>
+        En esta página se encuentra la resolución de dos problemas similares a los planteados en el TP1, explicando paso a paso el proceso empleado para resolver cada uno. 
+        <br/><br/>
+        El código del segundo problema será útil tanto para el TP1 como para los trabajos a realizar durante el resto del año.
+    </p>
+    <h2>
+        Problema 1: Números Primos
+    </h2>
+    <div style="background-color:gainsboro; padding:0.1em 1em;">
+        <p>
+            <i>
+                Se debe realizar un script que compruebe si un número ingresado por el usuario es primo o no. (Un número primo es aquel que sólo puede dividirse por 1 y por sí mismo).
+            </i>
+        </p>
+        <h3>
+            <i>Requerimientos</i>
+        </h3>
+        <ul>
+            <li>
+                <i>
+                    La función debe implementarse en un módulo por fuera del script, y llevar el nombre:
+                </i>
+                <pre>
+                    <code>
+verificar_primo(numero)
+                    </code>
+                </pre>
+            </li>
+            <li>
+                <i>
+                    La función debe devolver un valor booleano, indicando si el número es primo.
+                </i>
+            </li>
+            <li>
+                <i>
+                    La función debe implementarse en un módulo con el nombre "funciones_tp1.py"
+                </i>
+            </li>
+            <li>
+                <i>
+                    El script debe verificar el valor ingresado por el usuario, solicitandolo nuevamente si no tiene el formato correcto.
+                </i>
+            </li>
+        </ul>
+    </div>
+    <h3>
+        Resolución
+    </h3>
+    <p>
+        El problema plantea una serie de requerimientos para su entrega, incluyendo una determinada organización de archivos así como también un método de verificación de valores ingresados.
+        <br/>
+        Si intentamos abarcar todos los requerimientos en el primer intento de resolución es muy probable que no lo logremos, debido a la gran cantidad de puntos de falla que se presentan. En caso de tener errores se volvería muy tedioso investigar las causas e intentar resolverlos.
+    </p>
+    <h4>
+        Estrategia
+    </h4>
+    <p>
+        Para comenzar y asegurarnos de <i>dar un paso firme</i> al iniciar, vamos a remover la mayor cantidad de requerimientos posibles. Dado que el objetivo de este ejercicio es verificar si un número es primo o no, nos vamos a concentrar primero en el algoritmo. Es decir, de momento vamos a trabajar con los siguientes objetivos:
+    </p>
+    <ul>
+        <li>
+            <del>Utilización de un número ingresado por el usuario</del> &#8594; Vamos a utilizar un valor escrito manualmente en una variable, para asegurarnos de que es del tipo correcto y no hay errores de conversión. Además, eliminamos de momento el uso de "print" e "input".
+        </li>
+        <li>
+            <del>Implementación en una función fuera del script</del> &#8594; Vamos a implementar todo en un único script, sin englobar las acciones dentro de una función.
+        </li>
+    </ul>
+    <h4>
+        Algoritmo
+    </h4>
+    <p>
+        Ahora que decidimos qué objetivos vamos a cumplir de momento, llega el momento de plantear el algoritmo que utilizaremos para resolver el problema principal. Para esto, podemos preguntarnos: 
+        <br/>
+        <i>¿Cómo resolveríamos este problema nosotros en papel y lápiz?</i>
+        <br/><br/>
+        En este caso, debemos verificar si un número es primo. Para esto es muy importante entender qué significa que un número sea primo. La definición de "número primo" es la siguiente:
+        <br/>
+        <i>Un número primo es todo aquel que es únicamente divisible por 1 y por sí mismo.</i>
+        <br/><br/>
+        De esta definición podemos establecer lo siguiente: si existe algún número distinto de 1 y del número que estamos verificando <b>que sea múltiplo</b> de nuestro número, entonces este <b>no es primo</b>.
+        <br/>
+        Esto nos es útil ya que contamos con una forma muy fácil de verificar si un número es múltiplo de otro utilizando el operador 'módulo' (%), que devuelve el resto de la división entre dos números. En caso de que este resto sea 0, el divisor es múltiplo del dividendo.
+        <br/><br/>
+        Los números que utilizaremos como <i>cantidatos a divisor</i> deben ser todos los números comprendidos entre 2 y <i>nuestro número menos uno</i>, ya que si incluyesemos estos valores en la verificación, el resto de la división daría cero y por ende llegaríamos una conclusión errada.
+        <br/><br/>
+        Dado que la cantidad de <i>candidatos a divisor</i> puede ser muy grande (imagínense si <i>nuestro número</i> fuera 1000... serían 998 valores a chequear), podemos implementar una estrategia del tipo 'el número es primo hasta que se demuestre lo contrario'. 'Demostrar lo contrario', en este caso, es encontrar un número que sea divisor del número a verificar.
+        <br/><br/>
+        A partir de este punto, podemos comenzar a elaborar el código.
+    </p>
+    <h4>
+        Código
+    </h4>
+    <p>
+        Más arriba decidimos que, para el paso inicial de nuestra resolución, utilizaríamos un valor almacenado en una variable en lugar de solicitarlo al usuario. 
+    </p>
+    <pre>
+        <code>
+valor_a_verificar = 473     
+# este es el valor que intentaremos verificar.
+# para comprobar si el algoritmo funciona correctamente, 
+# debemos ir cambiandolo y evaluar el resultado obtenido.
+        </code>
+    </pre>
+    <p>
+        La <b>acción repetida de verificar el resto de la división</b> y el <b>rango de valores determinado</b> nos sugieren que la herramienta correcta para este problema puede ser un bucle de tipo <i>for</i>. 
+        <br/><br/>
+        Los valores sobre los que debemos iterar son los posibles divisores, y dado que conocemos el mínimo y el máximo del rango, así como también la distancia entre elementos (1 unidad), podemos utilizar un iterable <i>range()</i>.
+        <br/><br/>
+        Por último, nos queda definir la acción a realizar dentro del bucle. Como establecimos que 'desmentiremos' la teoría inicial de que el número es primo en caso de encontrar un divisor, debemos establecer una variable que almacene el estado de esta afirmación. Antes de comenzar el estado debe ser 'True', y al encontrar un divisor debe cambiar a 'False'.
+    </p>
+    <pre>
+        <code>
+es_primo = True
+
+for posible_divisor in range(2,valor_a_verificar):
+    if valor_a_verificar % posible_divisor == 0:
+        es_primo = False
+        </code>
+    </pre>
+    <p>
+        Al finalizar este bucle, la variable <i>es_primo</i> contendrá el resultado de la evaluación. Entonces, podremos indicar a través del terminal si el número es primo o no.
+    </p>
+    <pre>
+        <code>
+if es_primo == True:
+    print("El número " + str(valor_a_verificar) + " es primo")
+else:
+    print("El número " + str(valor_a_verificar) + " no es primo")
+        </code>
+    </pre>
+    <p>
+        Juntando todos estos bloques de código podemos formar el primer script para verificar el correcto funcionamiento:
+    </p>
+    <pre>
+        <code>
+valor_a_verificar = 473     
+# este es el valor que intentaremos verificar.
+# para comprobar si el algoritmo funciona correctamente, 
+# debemos ir cambiandolo y evaluar el resultado obtenido.
+
+es_primo = True
+
+for posible_divisor in range(2,valor_a_verificar):
+    if valor_a_verificar % posible_divisor == 0:
+        es_primo = False
+
+if es_primo == True:
+    print("El número " + str(valor_a_verificar) + " es primo")
+else:
+    print("El número " + str(valor_a_verificar) + " no es primo")
+        </code>
+    </pre>
+    <p>
+        Ya verificamos el correcto funcionamiento de nuestro algoritmo. A partir de este punto, debemos agregar uno a uno todos los requerimientos que obviamos previamente y verificar su correcto funcionamiento.
+    </p>
+    <h4>
+        <i>
+            Solicitar un valor al usuario
+        </i>
+    </h4>
+    <p>
+        En lugar de dejar el número definido manualmente en una variable, utilizamos la funcion <i>input()</i> para capturar lo que ingresa el usuario. Convertimos el valor ingresado en int, y lo almacenamos en la variable.
+    </p>
+    <pre>
+        <code>
+# AGREGAMOS ESTA LINEA
+valor_a_verificar = int(input("Ingrese un número para verificar si es primo"))
+
+es_primo = True
+
+for posible_divisor in range(2,valor_a_verificar):
+    if valor_a_verificar % posible_divisor == 0:
+        es_primo = False
+
+if es_primo == True:
+    print("El número " + str(valor_a_verificar) + " es primo")
+else:
+    print("El número " + str(valor_a_verificar) + " no es primo")
+        </code>
+    </pre>
+    <h4>
+        <i>Verificar si el valor es correcto. Caso contrario, solicitarlo nuevamente</i>
+    </h4>
+    <p>
+        Como no podemos convertir el valor a int si no se trata de un número, primero debemos verificar esto y solicitar un número nuevo hasta que represente un int. Para esto se utiliza un bucle de repeticiones indefinidas (<i>while</i>).
+    </p>
+    <pre>
+        <code>
+"""
+Reemplazamos la línea agregada anteriormente desde este punto...
+"""
+valor_a_verificar = input("Ingrese un número para verificar si es primo")
+# como aún no comprobamos si representa un número, no podemos convertir a int
+
+if valor_a_verificar.isnumeric() == False:
+    valor_a_verificar = input("No es un número. Ingrese un número nuevamente")
+
+# Si el código llega a esta línea, es porque finalizó el bucle y por ende
+# 'valor_a_verificar' representa un int. Recién en este punto podemos convertir
+valor_a_verificar = int(valor_a_verificar)
+"""
+...hasta este punto
+"""
+
+es_primo = True
+
+for posible_divisor in range(2,valor_a_verificar):
+    if valor_a_verificar % posible_divisor == 0:
+        es_primo = False
+
+if es_primo == True:
+    print("El número " + str(valor_a_verificar) + " es primo")
+else:
+    print("El número " + str(valor_a_verificar) + " no es primo")
+        </code>
+    </pre>
+    <h4>
+        <i>
+            Implementar el algoritmo en una función
+        </i>
+    </h4>
+    <p>
+        IMPORTANTE! Al implementar el algoritmo en una función, esta función deja de "ver" las variables correspondientes al script. Debido a esto, debe recibir el valor como parámetro y devolver el resultado como valor de retorno.
+    </p>
+    <pre>
+        <code>
+"""
+Acá comienza la definición de la función
+"""
+def verificar_primo(valor):
+    es_primo = True
+
+    for posible_divisor in range(2,valor):
+        if valor % posible_divisor == 0:
+            es_primo = False
+    
+    return es_primo
+"""
+Acá finaliza la definición de la función
+"""
+
+valor_a_verificar = input("Ingrese un número para verificar si es primo")
+
+while valor_a_verificar.isnumeric() == False:
+    valor_a_verificar = input("No es un número. Ingrese un número nuevamente")
+
+valor_a_verificar = int(valor_a_verificar)
+
+"""
+En esta línea llamamos a la función y almacenamos su resultado
+"""
+resultado = es_primo(valor_a_verificar)
+
+if resultado == True:
+    print("El número " + str(valor_a_verificar) + " es primo")
+else:
+    print("El número " + str(valor_a_verificar) + " no es primo")
+
+        </code>
+    </pre>
+    <h4>
+        <i>
+            Implementar la función en un módulo e importarlo desde el script principal
+        </i>
+    </h4>
+    <p>
+        A partir de este punto, la función pasa a "vivir" en otro archivo, denominado <i>módulo</i>. Debido a esto, el módulo debe ser importado desde el script principal. Este último es el que va a interactuar con el usuario, verificar los valores y llamar a la función.
+    </p>
+    <p>
+        <i>
+            Script principal - ej1.py
+        </i>
+    </p>
+    <pre>
+        <code>
+import funciones_tp1
+
+valor_a_verificar = input("Ingrese un número para verificar si es primo")
+
+if valor_a_verificar.isnumeric() == False:
+    valor_a_verificar = input("No es un número. Ingrese un número nuevamente")
+
+valor_a_verificar = int(valor_a_verificar)
+
+resultado = funciones_tp1.verificar_primo(valor_a_verificar)
+
+if resultado == True:
+    print("El número " + str(valor_a_verificar) + " es primo")
+else:
+    print("El número " + str(valor_a_verificar) + " no es primo")
+        </code>
+    </pre>
+    <p>
+        <i>
+            Módulo - funciones_tp1.py
+        </i>
+    </p>
+    <pre>
+        <code>
+def verificar_primo(valor):
+    es_primo = True
+
+    for posible_divisor in range(2,valor):
+        if valor % posible_divisor == 0:
+            es_primo = False
+    
+    return es_primo
+        </code>
+    </pre>
+    <p>
+        En este punto, ya logramos implementar la solución al problema planteado cumpliendo con todos los requerimientos.
+    </p>
+    <div style="height: 3em;"></div>
+    <h2>
+        Problema 2: Función de verificación de número flotante
+    </h2>
+    <div style="background-color:gainsboro; padding:0.1em 1em;">
+        <p>
+            Hasta el momento, nos encontramos más de una vez con la necesidad de solicitar al usuario el ingreso de un valor numérico. Sin embargo, el único método de entrada de información que conocemos permite recibir una cadena de texto. Esto presenta el inconveniente de que el usuario puede ingresar información que no representa un número, y por ende no es útil para el funcionamiento del programa.
+            <br/><br/>
+            Para verificar si una cadena de texto representa un valor numérico conocimos el método 'isnumeric()', que devuelve 'True' si la cadena representa un número, y 'False' si no. Sin embargo, esta función únicamente permite verificar números enteros positivos, y nuestros programas pueden necesitar el ingreso de numeros negativos o con coma. Para esto, crearemos nuestra propia función de verificación a continuación.
+        </p>
+    </div>
+    <h3>
+        Estrategia
+    </h3>
+    <p>
+        De la misma forma que en el ejercicio anterior, vamos a plantear la resolución de esta función por partes.
+        <br/><br/>
+        En la primer versión crearemos un único script en el que la cadena de texto esté guardada en una variable, y el código no forme parte de una función.
+        <br/>
+        A modo de simplificar aún más el problema, pensaremos el algoritmo primero en base a números enteros positivos (es decir, que únicamente cuentan con dígitos numéricos) y una vez que comprendamos bien el funcionamiento agregaremos lo necesario para extender la funcionalidad a números negativos y/o con coma.
+        <br/><br/>
+        No está demás aclarar que la tarea de esta función <b>no es</b> convertir los números de <i>str</i> a <i>float</i> o <i>int</i>, sino devolver un valor booleano que indique si es posible o no realizar la conversión. Para convertir, el lenguaje ya nos proporciona las funciones <i>float()</i> e <i>int()</i>.
+    </p>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
