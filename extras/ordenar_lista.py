@@ -15,6 +15,9 @@ lista = [7,2,4,1,15,-8,2,8]
 
 # DEFINO la función - en esta parte, el código NO SE EJECUTA
 def ordenar_lista(lista_desord):
+    """
+    Esta funcion recibe una lista de números y devuelve como retorno otra lista con los elementos ordenados de menor a mayor
+    """
     # 1 - Definir lista vacía
     lista_ord = []
 
@@ -26,7 +29,7 @@ def ordenar_lista(lista_desord):
             if mas_chico > elemento:
                 mas_chico = elemento            # si el elemento con el que estamos comparando es más chico que el que pensábamos, lo cambiamos. mas_chico pasa a contener el menor encontrado hasta el momento.
                                                 # al finalizar el bucle, en la variable mas_chico no puede haber otro número que no sea el más chico de la lista desordenada.
-                                                
+
         # 3 - Agregar el número encontrado al final de lista_ord
         lista_ord.append(mas_chico)
 
