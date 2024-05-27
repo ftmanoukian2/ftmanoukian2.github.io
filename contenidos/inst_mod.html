@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $(function(){$('head').load("../highlight.html")});
+            $(function(){$('head script').each(function(){eval($(this).text());})});
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        Instalación de módulos externos
+    </h1>
+    <p>
+        A continuación se presenta la secuencia de pasos a realizar para configurar correctamente la computadora e instalar el módulo "pyserial" en Windows.
+    </p>
+    <h2>
+        Paso 1 - Deshabilitar alias automáticos
+    </h2>
+    <ol>
+        <li>
+            <p>Desde el menú Inicio, buscar y abrir la aplicación "Configuración".</p><br/>
+            <img src="./upgrade+instmodulos/conf1.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>Dentro de Configuración, seleccionar "Aplicaciones".</p><br/>
+            <img src="./upgrade+instmodulos/conf2.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>Luego, seleccionar "Aplicaciones y características"</p><br/>
+            <img src="./upgrade+instmodulos/conf3.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>Seleccionar la opción en azul "Alias de ejecución de aplicaciones".</p><br/>
+            <img src="./upgrade+instmodulos/conf4.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>Recorrer la lista hasta encontrar las siguientes opciones:</p>
+            <ul>
+                <li>
+                    Instalador de aplicación - python.exe
+                </li>
+                <li>
+                    Instalador de aplicación - python3.exe
+                </li>
+            </ul>
+            <p>Deseleccionar ambas opciones, y cerrar la ventana.</p>
+            <br/>
+            <img src="./upgrade+instmodulos/conf5.png" style="width: 500px;">
+        </li>
+    </ol>
+    <h2>
+        Paso 2 (Opcional) - Actualización de Python
+    </h2>
+    <ol>
+        <li>
+            <p>Descargar la última versión de Python desde el siguiente <a href="https://www.python.org/downloads/">enlace</a>.</p>
+        </li>
+        <li>
+            <p>Abrir el archivo descargado, y seleccionar la opción "Customize Installation"</p><br/>
+            <img src="./upgrade+instmodulos/upgr1.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>En la sección "Optional Features", tildar todas las casillas.</p><br/>
+            <img src="./upgrade+instmodulos/upgr2.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>En la sección "Advanced Options", tildar las casillas mostradas en la captura. <br/>
+            No se debe modificar la ruta de instalación automática. <br/>
+            Al finalizar, presionar el botón "Install" en la esquina inferior derecha.</p><br/>
+            <img src="./upgrade+instmodulos/upgr3.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>Una vez finalizada la instalación, se abrirá la siguiente ventana. Presionar el botón "Close".</p><br/>
+            <img src="./upgrade+instmodulos/upgr4.png" style="width: 500px;">
+        </li>
+    </ol>
+    <h2>
+        Paso 3 - Instalar el módulo
+    </h2>
+    <ol>
+        <li>
+            <p>Presionar las teclas "Win" + "R" para abrir la ventana "Ejecutar". Escribir "cmd" en el cuadro de texto y presionar "Enter".</p><br/>
+            <img src="./upgrade+instmodulos/cmd1.png" style="width: 500px;">
+        </li>
+        <li>
+            <p>En el terminal, escribir el siguiente comando y presionar "Enter":</p>
+            <pre>python -m pip install pyserial</pre>
+            <img src="./upgrade+instmodulos/cmd2.png" style="width: 600px;">
+            <p>Al finalizar la instalación, se imprimirá el siguiente mensaje:
+            </p><br/>
+            <img src="./upgrade+instmodulos/cmd3.png" style="width: 600px;">
+        </li>
+        <li>
+            <p>Probar el funcionamiento del módulo:</p>
+            <ol>
+                <li>
+                    Con el Arduino <b>desconectado</b> de la computadora, ingresar el siguiente comando en el terminal:
+                    <pre>python -m serial.tools.list_ports</pre>
+                    Como respuesta, debería recibirse el mensaje:
+                    <pre>no ports found</pre>
+                </li>
+                <li>
+                    Luego, conectar el arduino e ingresar el comando nuevamente. El mensaje de respuesta ahora deberá indicar el puerto en que se conectó el Arduino.
+                </li>
+            </ol>
+            <br/>
+            <img src="./upgrade+instmodulos/cmd4.png" style="width: 600px;">
+        </li>
+    </ol>
+    <footer>
+        <a href="../index.html">Volver al índice</a>
+    </footer>
+</body>
