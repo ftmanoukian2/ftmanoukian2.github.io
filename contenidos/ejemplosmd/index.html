@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Site</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #222;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #444;
+        }
+
+        /* Static Toggle Button */
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #222;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+            z-index: 1000; /* Ensures it's always above other elements */
+        }
+
+        .toggle-btn.collapsed {
+            background: #ddd;
+            color: black;
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            transition: margin-left 0.3s ease-in-out;
+            width: calc(100% - 270px);
+        }
+
+        /* Hide sidebar when collapsed */
+        .collapsed {
+            transform: translateX(-100%);
+        }
+
+        /* Adjust content when sidebar collapses */
+        .collapsed ~ .content {
+            margin-left: 20px;
+            width: calc(100% - 40px);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                margin-left: 220px;
+                width: calc(100% - 220px);
+            }
+
+            .collapsed ~ .content {
+                margin-left: 20px;
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <h2>📖 Menu</h2>
+        <a href="?page=home.md">🏠 Home</a>
+        <a href="?page=about.md">ℹ️ About</a>
+        <a href="?page=contact.md">📧 Contact</a>
+    </div>
+
+    <!-- Toggle Button (Now Static & Changes Color) -->
+    <button class="toggle-btn" id="toggle-btn">☰</button>
+
+    <!-- Main Content -->
+    <div class="content" id="content">Loading...</div>
+
+    <script>
+        async function loadMarkdown() {
+            const params = new URLSearchParams(window.location.search);
+            const page = params.get('page') || 'home.md';
+
+            try {
+                const response = await fetch(page);
+                if (!response.ok) throw new Error("Markdown file not found.");
+                const text = await response.text();
+                document.getElementById('content').innerHTML = marked.parse(text);
+            } catch (error) {
+                document.getElementById('content').innerHTML = "<h2>Error: Page not found</h2>";
+            }
+        }
+
+        loadMarkdown();
+
+        // Sidebar toggle functionality
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const content = document.getElementById('content');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+            toggleBtn.classList.toggle('collapsed'); // Change button color
+        });
+    </script>
+</body>
+</html>
